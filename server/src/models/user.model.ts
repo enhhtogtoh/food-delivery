@@ -1,11 +1,11 @@
 import { models, model, Schema, Model, ObjectId } from "mongoose";
 
-enum UserRole {
+export enum UserRole {
   USER = "USER",
   ADMIN = "ADMIN",
 }
 
-type User = {
+export type User = {
   email: string;
   password: string;
   phoneNumber: string;
@@ -18,21 +18,24 @@ type User = {
 
 const UserSchema = new Schema<User>(
   {
-    email: [{ type: String, required: true }],
-    password: [{ type: String, required: true }],
-    phoneNumber: { type: String, required: true },
-    address: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    phoneNumber: { type: String, required: false },
+    address: { type: String, required: false },
     role: {
       type: String,
       enum: Object.values(UserRole),
       default: UserRole.USER,
-      required: true,
+      required: false,
     },
 
-    isVerified: { type: Boolean, default: false, required: true },
-    ttl: { type: Date },
+    isVerified: { type: Boolean, default: false, required: false },
+    ttl: { type: Date, required: true },
   },
   { timestamps: true },
 );
+
+UserSchema.index({ ttl: 1 }, { expireAfterSeconds: 0 });
+
 export const UserModel: Model<User> =
   models["Users"] || model("Users", UserSchema);

@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 const port = 8000;
 
-app.use("./users", userRouter);
+app.use("/auth", userRouter);
 
 app.listen(port, async () => {
   await connectToMongoDb();
