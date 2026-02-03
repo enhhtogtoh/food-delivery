@@ -7,11 +7,11 @@ export const signInUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const signIn = await UserModel.findOne({ email });
-    if (!signIn) return res.status(401).send({ message: "User not found" });
+    if (!signIn) return res.status(401).send({ message: "Хэрэглэгч олдсонгүй" });
 
     const isVerifiedPass = await bcrypt.compare(password, signIn.password);
     if (!isVerifiedPass)
-      return res.status(401).send({ message: "Invalid password" });
+      return res.status(401).send({ message: "Нууц үг буруу байна" });
 
     const user = await UserModel.findOne({
       email,
@@ -19,9 +19,9 @@ export const signInUser = async (req: Request, res: Response) => {
 
     return res
       .status(200)
-      .send({ message: "User signed in success", data: user });
+      .send({ message: "Хэрэглэгч амжилттай нэвтэрлээ", data: user });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Error signing in", error });
+    res.status(500).send({ message: "Нэвтрэх үед алдаа гарлаа", error });
   }
 };

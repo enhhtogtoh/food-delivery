@@ -14,6 +14,8 @@ export type User = {
   orderedFoods: ObjectId[];
   ttl: Date;
   isVerified: Boolean;
+  resetToken?: string;
+  resetTokenExpire?: Date;
 };
 
 const UserSchema = new Schema<User>(
@@ -31,6 +33,8 @@ const UserSchema = new Schema<User>(
 
     isVerified: { type: Boolean, default: false, required: false },
     ttl: { type: Date, required: true },
+    resetToken: { type: String },
+    resetTokenExpire: { type: Date },
   },
   { timestamps: true },
 );
