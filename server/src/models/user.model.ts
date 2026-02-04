@@ -14,16 +14,14 @@ export type User = {
   orderedFoods: ObjectId[];
   ttl: Date;
   isVerified: Boolean;
-  resetToken?: string;
-  resetTokenExpire?: Date;
 };
 
 const UserSchema = new Schema<User>(
   {
     email: { type: String, required: true },
     password: { type: String, required: true },
-    phoneNumber: { type: String, required: false },
-    address: { type: String, required: false },
+    phoneNumber: { type: String, required: true },
+    address: { type: String, required: true },
     role: {
       type: String,
       enum: Object.values(UserRole),
@@ -33,8 +31,6 @@ const UserSchema = new Schema<User>(
 
     isVerified: { type: Boolean, default: false, required: false },
     ttl: { type: Date, required: true },
-    resetToken: { type: String },
-    resetTokenExpire: { type: Date },
   },
   { timestamps: true },
 );
