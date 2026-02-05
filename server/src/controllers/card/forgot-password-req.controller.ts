@@ -20,3 +20,5 @@ export const forgotPassword = async (req: Request, res: Response) => {
     res.status(500).send({ message: "Forgot password failed" });
   }
 };
+// "email":"pinecone123@gmail.com",
+// "password": "pinecone1234567"

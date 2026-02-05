@@ -29,7 +29,7 @@ const UserSchema = new Schema<User>(
       required: false,
     },
 
-    isVerified: { type: Boolean, default: false, required: false },
+    isVerified: { type: Boolean, default: false, required: true },
     ttl: { type: Date, required: true },
   },
   { timestamps: true },
