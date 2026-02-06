@@ -26,6 +26,7 @@ export const signUpUser = async (req: Request, res: Response) => {
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET!, {
       expiresIn: "2h",
     });
+
     await verifyUserEmail(
       email,
       `${process.env.BACKEND_API}/auth/verify-user?token=${token}`,
@@ -35,6 +36,7 @@ export const signUpUser = async (req: Request, res: Response) => {
       .send({ message: `Бүртгэл амжилттай`, data: newUser, token });
   } catch (error) {
     console.error(error);
+
     res.status(200).send({ message: `Бүртгүүлэх үед алдаа гарлаа`, error });
   }
 };
