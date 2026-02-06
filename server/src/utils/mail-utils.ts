@@ -22,7 +22,7 @@ export const verifyUserEmail = async (receiver: string, verifyLink: string) => {
       background-color: aqua;
       border-radius: 10px;
     "
-    >verify dar llraa</a
+    >verify dar</a
   >
 </div>
 `,
