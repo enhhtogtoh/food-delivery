@@ -13,8 +13,8 @@ app.use(express.json());
 const port = 10000;
 
 app.use("/auth", userRouter);
+connectToMongoDb();
 
-app.listen(port, async () => {
-  await connectToMongoDb();
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
