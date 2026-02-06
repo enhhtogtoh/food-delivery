@@ -4,6 +4,8 @@ configDotenv();
 const { AUTH_EMAIL, AUTH_PASS } = process.env;
 const transport = nodemailer.createTransport({
   service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
   auth: { user: AUTH_EMAIL, pass: AUTH_PASS },
 });
 
