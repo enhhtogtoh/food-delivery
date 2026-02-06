@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 const port = 10000;
 
-// app.use("/auth", userRouter);
+app.use("/auth", userRouter);
 connectToMongoDb();
 
 app.listen(port, () => {
