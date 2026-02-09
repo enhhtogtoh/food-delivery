@@ -1,5 +1,6 @@
 // import nodemailer from "nodemailer";
 import { configDotenv } from "dotenv";
+import { Request } from "express";
 import { Resend } from "resend";
 configDotenv();
 
@@ -13,24 +14,75 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 //   auth: { user: AUTH_EMAIL, pass: AUTH_PASS },
 // });
 
-export const verifyUserEmail = async (receiver: string, verifyLink: string) => {
+export const verifyUserEmail = async (
+  receiver: string,
+  verifyLink: string,
+  req: Request,
+) => {
   await resend.emails.send({
     from: "onboarding@resend.dev",
     to: receiver,
     subject: "Verify user",
-    html: `<div style="width: 300px; height: 250px; border-radius: 8px">
-  <a
-    href="${verifyLink}" target="_blank"
-    style="
-      width: 100px;
-      height: 100px;
-      color: black;
-      background-color: aqua;
-      border-radius: 10px;
-    "
-    >verify dar</a
-  >
-</div>
+    html: ` <div
+      style="
+        display: flex;
+        justify-content: center;
+        background-color: blue;
+        width: 100%;
+        height: 100vh;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          width: 400px;
+          height: 600px;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            padding-top: 100px;
+            font-family: Arial, Helvetica, sans-serif;
+          "
+        >
+          <p style="margin: 0">Thanks for signing up!</p>
+          <h2 style="margin: 0">Verify your email address</h2>
+        </div>
+        <p style="text-align: center; font-family: Arial, Helvetica, sans-serif; margin-left: 50px; margin-right: 50px;">
+          You've entered "${req.body.email}" as the email address for you account. Please verify
+          this email address by clicking button below.
+        </p>
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <a
+            href="${verifyLink}"
+            target="_blank"
+            style="
+              width: 300px;
+              background-color: blue;
+              height: 50px;
+              color: white;
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 20px;
+              font-size: 20px;
+              font-family: Arial, Helvetica, sans-serif;
+            "
+            >Verify your email</a
+          >
+        </div>
+        <div style="display: flex; justify-content: center;"><p style="color: gray; font-family: Arial, Helvetica, sans-serif;">Powered by Food Delivery</p></div>
+      </div>
+    </div>
 `,
   });
 };
