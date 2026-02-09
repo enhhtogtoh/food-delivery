@@ -14,16 +14,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 //   auth: { user: AUTH_EMAIL, pass: AUTH_PASS },
 // });
 
-export const verifyUserEmail = async (
-  receiver: string,
-  verifyLink: string,
-
-) => {
+export const verifyUserEmail = async (receiver: string, verifyLink: string) => {
   await resend.emails.send({
     from: "onboarding@resend.dev",
     to: receiver,
     subject: "Verify user",
-    html: ` <div
+    html: `     <div
       style="
         display: flex;
         justify-content: center;
@@ -35,8 +31,8 @@ export const verifyUserEmail = async (
     >
       <div
         style="
-          width: 400px;
-          height: 600px;
+          width: auto;
+          height: auto;
           background-color: white;
           display: flex;
           flex-direction: column;
@@ -49,25 +45,35 @@ export const verifyUserEmail = async (
             flex-direction: column;
             gap: 10px;
             align-items: center;
-            padding-top: 100px;
+            padding-top: 50px;
             font-family: Arial, Helvetica, sans-serif;
           "
         >
           <p style="margin: 0">Thanks for signing up!</p>
           <h2 style="margin: 0">Verify your email address</h2>
         </div>
-        <p style="text-align: center; font-family: Arial, Helvetica, sans-serif; margin-left: 50px; margin-right: 50px;">
-          You've entered  as the email address for you account. Please verify
+        <p
+          style="
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 50px;
+            margin-right: 50px;
+          "
+        >
+          You've entered as the email address for you account. Please verify
           this email address by clicking button below.
         </p>
-        <div style="display: flex; align-items: center; justify-content: center;">
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+        >
           <a
-            href="${verifyLink}"
+            href=""
             target="_blank"
             style="
-              width: 300px;
+              width: auto;
+              padding: 20px;
               background-color: blue;
-              height: 50px;
+              height: auto;
               color: white;
               text-align: center;
               display: flex;
@@ -80,7 +86,11 @@ export const verifyUserEmail = async (
             >Verify your email</a
           >
         </div>
-        <div style="display: flex; justify-content: center;"><p style="color: gray; font-family: Arial, Helvetica, sans-serif;">Powered by Food Delivery</p></div>
+        <div style="display: flex; justify-content: center">
+          <p style="color: gray; font-family: Arial, Helvetica, sans-serif">
+            Powered by Food Delivery
+          </p>
+        </div>
       </div>
     </div>
 `,
