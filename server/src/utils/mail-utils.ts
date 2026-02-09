@@ -16,7 +16,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const verifyUserEmail = async (receiver: string, verifyLink: string) => {
   await resend.emails.send({
-    from: "onboarding@resend.dev",
+    from: "Food Delivery <onboarding@resend.dev>",
     to: receiver,
     subject: "Verify user",
     html: `      <div style="width: 100%; height: 100vh; align-items: center">
@@ -44,7 +44,7 @@ export const verifyUserEmail = async (receiver: string, verifyLink: string) => {
           style="display: flex; align-items: center; justify-content: center"
         >
           <a
-            href=""
+            href="${verifyLink}"
             target="_blank"
             style="
               max-width: 300px;
