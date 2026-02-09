@@ -19,61 +19,107 @@ export const verifyUserEmail = async (receiver: string, verifyLink: string) => {
     from: "onboarding@resend.dev",
     to: receiver,
     subject: "Verify user",
-    html: `      <div style="width: 100%; height: 100vh; align-items: center">
-      <div style="width: auto; height: auto; background-color: white">
-        <div
-          style="padding-top: 50px; font-family: Arial, Helvetica, sans-serif"
-        >
-          <p style="margin: 0; text-align: center">Thanks for signing up!</p>
-          <h2 style="margin: 0; text-align: center">
-            Verify your email address
-          </h2>
-        </div>
-        <p
-          style="
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            margin-left: 50px;
-            margin-right: 50px;
-          "
-        >
-          You've entered as the email address for you account. Please verify
-          this email address by clicking button below.
-        </p>
-        <div
-          style="display: flex; align-items: center; justify-content: center"
-        >
-          <a
-            href="${verifyLink}"
-            target="_blank"
+    html: `      <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      font-family: Arial, Helvetica, sans-serif;
+    "
+  >
+    <!-- Outer wrapper -->
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="background-color: #f4f4f4; padding: 40px 0"
+    >
+      <tr>
+        <td align="center">
+          <!-- Card -->
+          <table
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
             style="
-              max-width: 300px;
-              padding: 20px;
-              background-color: blue;
-              max-height: 40px;
-              color: white;
-              text-align: center;
+              max-width: 600px;
+              background-color: #ffffff;
+              border-radius: 12px;
+              padding: 30px;
+            "
+          >
+            <!-- Header -->
+            <tr>
+              <td align="center" style="padding-bottom: 20px">
+                <p style="margin: 0; font-size: 14px; color: #555">
+                  Thanks for signing up!
+                </p>
+                <h2 style="margin: 10px 0 0 0; color: #000">
+                  Verify your email address
+                </h2>
+              </td>
+            </tr>
 
-              border-radius: 20px;
-              font-size: 20px;
-              font-family: Arial, Helvetica, sans-serif;
-            "
-            >Verify your email</a
-          >
-        </div>
-        <div>
-          <p
-            style="
-              color: gray;
-              font-family: Arial, Helvetica, sans-serif;
-              text-align: center;
-            "
-          >
-            Powered by Food Delivery
-          </p>
-        </div>
-      </div>
-    </div>
+            <!-- Content -->
+            <tr>
+              <td
+                align="center"
+                style="
+                  font-size: 15px;
+                  color: #333;
+                  padding: 0 20px 30px 20px;
+                  line-height: 1.5;
+                "
+              >
+                You've entered this email address for your account.
+                <br />
+                Please verify your email address by clicking the button below.
+              </td>
+            </tr>
+
+            <!-- Button -->
+            <tr>
+              <td align="center" style="padding-bottom: 30px">
+                <a
+                  href="${verifyLink}"
+                  target="_blank"
+                  style="
+                    display: inline-block;
+                    padding: 15px 30px;
+                    background-color: #2563eb;
+                    color: #ffffff;
+                    text-decoration: none;
+                    border-radius: 25px;
+                    font-size: 16px;
+                    font-weight: bold;
+                  "
+                >
+                  Verify your email
+                </a>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                align="center"
+                style="
+                  font-size: 12px;
+                  color: #888;
+                  border-top: 1px solid #eee;
+                  padding-top: 15px;
+                "
+              >
+                Powered by Food Delivery
+              </td>
+            </tr>
+          </table>
+          <!-- End Card -->
+        </td>
+      </tr>
+    </table>
+    <!-- End Wrapper -->
+  </body>
 `,
   });
 };
