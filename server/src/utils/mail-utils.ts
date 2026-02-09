@@ -58,7 +58,7 @@ export const verifyUserEmail = async (receiver: string, verifyLink: string) => {
               font-size: 20px;
               font-family: Arial, Helvetica, sans-serif;
             "
-            >Tetris baival end dar</a
+            >Verify your email</a
           >
         </div>
         <div>
