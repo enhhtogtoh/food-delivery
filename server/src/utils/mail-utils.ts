@@ -17,7 +17,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const verifyUserEmail = async (
   receiver: string,
   verifyLink: string,
-  req: Request,
+
 ) => {
   await resend.emails.send({
     from: "onboarding@resend.dev",
@@ -57,7 +57,7 @@ export const verifyUserEmail = async (
           <h2 style="margin: 0">Verify your email address</h2>
         </div>
         <p style="text-align: center; font-family: Arial, Helvetica, sans-serif; margin-left: 50px; margin-right: 50px;">
-          You've entered "${req.body.email}" as the email address for you account. Please verify
+          You've entered  as the email address for you account. Please verify
           this email address by clicking button below.
         </p>
         <div style="display: flex; align-items: center; justify-content: center;">
