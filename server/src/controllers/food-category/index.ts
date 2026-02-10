@@ -1,0 +1,1 @@
+export * from "./food-create-category.controller"

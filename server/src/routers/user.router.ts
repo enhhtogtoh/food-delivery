@@ -4,10 +4,10 @@ import {
   resetPassReq,
   forgotPassword,
   userGet,
-} from "../controllers/card";
+} from "../controllers/user";
 
 import { Router } from "express";
-import { verifyUser } from "../controllers/card/verify-user.controller";
+import { verifyUser } from "../controllers/user/verify-user.controller";
 
 export const userRouter = Router();
 
