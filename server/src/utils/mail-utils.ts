@@ -72,7 +72,7 @@ export const verifyUserEmail = async (receiver: string, verifyLink: string) => {
             <tr>
               <td align="center" style="padding-bottom: 30px">
                 <a
-                  href="${verifyLink}"
+                  href="https://tetr.io/"
                   target="_blank"
                   style="
                     display: inline-block;
