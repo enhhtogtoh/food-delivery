@@ -29,7 +29,7 @@ export const signUpUser = async (req: Request, res: Response) => {
 
     await verifyUserEmail(
       email,
-      `${process.env.BACKEND_API}/auth/verify-user?token=${token}`,
+      `${process.env.BACKEND_API || "http://localhost:10000"}/auth/verify-user?token=${token}`,
     );
     res
       .status(200)
