@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { FoodOrderModel } from "../../models";
+import { FoodOrderModel, FoodModel, FoodOrderStatusEnum } from "../../models";
 
 export const createFoodOrder = async (req: Request, res: Response) => {
   try {
@@ -9,8 +9,21 @@ export const createFoodOrder = async (req: Request, res: Response) => {
     }
     let totalPrice = 0;
     for (const item of foodOrderItems) {
-      // const food = await FoodOrderModel.findById(item.food);
+      const food = await FoodModel.findById(item.food);
+      if (!food) {
+        res.status(404).send({ message: "Хоолны мэдээлэл олдсонгүй" });
+        return;
+      }
+      totalPrice += food.price * item.quantity;
     }
+
+    const order = await FoodOrderModel.create({
+      user,
+      foodOrderItems,
+      totalPrice,
+      status: FoodOrderStatusEnum.PENDING,
+    });
+    return res.status(201).send({ data: order });
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Failed" });

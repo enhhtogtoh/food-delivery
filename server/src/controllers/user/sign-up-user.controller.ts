@@ -21,19 +21,28 @@ export const signUpUser = async (req: Request, res: Response) => {
       phoneNumber,
       password: hashedPassword,
       ttl: new Date(now + 1000 * 60 * 100),
+      isVerified: false,
     });
 
+    const verifyToken = jwt.sign(
+      { userId: newUser._id },
+      process.env.JWT_SECRET!,
+      { expiresIn: "1h" },
+    );
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET!, {
       expiresIn: "2h",
     });
 
+    const verifyLink = `http://localhost:10000/auth/verify-email?token=${verifyToken}`;
+
     await verifyUserEmail(
       email,
-      `${process.env.BACKEND_API || "http://localhost:10000"}/auth/verify-user?token=${token}`,
+      verifyLink,
+      // `${process.env.BACKEND_API || "http://localhost:10000"}/auth/verify-user?token=${token}`,
     );
     res
       .status(200)
-      .send({ message: `Бүртгэл амжилттай`, data: newUser, token });
+      .send({ message: `Бүртгэл амжилттай` });
   } catch (error) {
     console.error(error);
 
