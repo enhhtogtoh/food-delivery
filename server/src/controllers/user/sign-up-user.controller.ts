@@ -33,7 +33,7 @@ export const signUpUser = async (req: Request, res: Response) => {
     //   expiresIn: "2h",
     // });
 
-    const verifyLink = `${process.env.BACKEND_API || "http://localhost:10000"}/auth/verify-email?token=${verifyToken}`;
+    const verifyLink = `${process.env.BACKEND_API || "http://localhost:10000"}/auth/verify-user?token=${verifyToken}`;
 
     await verifyUserEmail(
       email,
