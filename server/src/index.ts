@@ -2,8 +2,8 @@ import { configDotenv } from "dotenv";
 import cors from "cors";
 import express, { Application } from "express";
 import connectToMongoDb from "./mongodb";
-import { userRouter } from "./routers";
-import { foodCategoryRouter } from "./routers/food.router";
+import { foodCategoryRouter, foodOrderRouter, userRouter } from "./routers";
+
 
 configDotenv();
 
@@ -14,6 +14,7 @@ const port = 10000;
 
 app.use("/auth", userRouter);
 app.use("/food", foodCategoryRouter);
+app.use("/food-order", foodOrderRouter);
 connectToMongoDb();
 
 app.listen(port, () => {
