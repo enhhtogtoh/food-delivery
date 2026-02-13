@@ -9,7 +9,7 @@ export const createCategory = async (req: Request, res: Response) => {
     }
     const category = await FoodCategoryModel.findOne({ categoryName });
     if (category) {
-      res.status(400).send({ message: "Ийм нэртэй category аль хэдийн байна" });
+      res.status(409).send({ message: "Ийм нэртэй category аль хэдийн байна" });
     }
     const create = await FoodCategoryModel.create({ categoryName });
 
