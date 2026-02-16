@@ -12,6 +12,7 @@ export const signUpUser = async (req: Request, res: Response) => {
       res
         .status(401)
         .send({ message: "Энэ хэрэглэгч аль хэдийн бүртгэлтэй байна" });
+      return;
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
