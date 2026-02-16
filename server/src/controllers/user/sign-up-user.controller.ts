@@ -9,7 +9,9 @@ export const signUpUser = async (req: Request, res: Response) => {
     const user = await UserModel.findOne({ email });
 
     if (user) {
-      res.status(401).send({ message: "User exists" });
+      res
+        .status(401)
+        .send({ message: "Энэ хэрэглэгч аль хэдийн бүртгэлтэй байна" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -25,7 +27,7 @@ export const signUpUser = async (req: Request, res: Response) => {
     });
 
     const verifyToken = jwt.sign(
-      { userId: newUser._id },
+      { userId: newUser._id, email: newUser.email },
       process.env.JWT_SECRET!,
       { expiresIn: "1h" },
     );
@@ -35,12 +37,10 @@ export const signUpUser = async (req: Request, res: Response) => {
 
     const verifyLink = `${process.env.BACKEND_API || "http://localhost:10000"}/auth/verify-user?token=${verifyToken}`;
 
-    await verifyUserEmail(
-      email,
-      verifyLink,
-      // `${process.env.BACKEND_API || "http://localhost:10000"}/auth/verify-user?token=${token}`,
-    );
-    res.status(200).send({ message: `Бүртгэл амжилттай` });
+    await verifyUserEmail(email, verifyLink);
+    res.status(200).send({
+      message: `Бүртгэл амжилттай үүсгэгдлээ. И-мэйлээ баталгаажуулна уу.`,
+    });
   } catch (error) {
     console.error(error);
 

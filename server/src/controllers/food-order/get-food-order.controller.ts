@@ -9,6 +9,6 @@ export const getFoodOrder = async (req: Request, res: Response) => {
     return res.status(200).send({ data: orders });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Захиалгын мэдээлэл авч чадсангүй" });
+    res.status(500).send({ message: "Захиалгын мэдээлэл авч чадсангүй" , error});
   }
 };

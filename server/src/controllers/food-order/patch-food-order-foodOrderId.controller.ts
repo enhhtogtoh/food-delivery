@@ -27,6 +27,6 @@ export const updateFoodOrder = async (req: Request, res: Response) => {
     return res.status(200).send(updatedOrder);
   } catch (error) {
     console.error(error);
-    return res.status(500).send({ message: "Failed to update order" });
+    return res.status(500).send({ message: "Failed to update order", error });
   }
 };

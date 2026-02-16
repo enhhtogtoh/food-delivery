@@ -7,6 +7,6 @@ export const userGet = async (req: Request, res: Response) => {
     res.status(200).send({ message: "succes", data: user });
   } catch (error) {
     console.error(error);
-    res.status(200).send({ message: "failed" });
+    res.status(200).send({ message: "failed", error });
   }
 };

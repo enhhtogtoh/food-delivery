@@ -1,34 +1,24 @@
 import { Request, Response } from "express";
 import { UserModel } from "../../models";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const resetPassReq = async (req: Request, res: Response) => {
+export const resetPassRequest = async (req: Request, res: Response) => {
   try {
-    const { token, newPassword } = req.body;
-
-    if (!token || !newPassword) {
-      return res.status(400).send({ message: "Missing data" });
+    const { email } = req.body;
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      res.status(404).send({ message: "User not found" });
+      return;
     }
+    const resetToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, {
+      expiresIn: "15m",
+    });
 
-
-    const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET!
-    ) as { userId: string };
-
-    const user = await UserModel.findById(decoded.userId);
-    if (!user)
-      return res.status(404).send({ message: "Хэрэглэгч олдсонгүй" });
-
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-
-    await user.save();
-
-    res.status(200).send({ message: "Нууц үг амжилттай солигдлоо" });
+    res
+      .status(200)
+      .send({ message: "Reset token generated", data: resetToken });
   } catch (error) {
     console.error(error);
-    res.status(400).send({ message: "Invalid or expired token" });
+    res.status(500).send({ message: "Forgot password failed", error });
   }
 };

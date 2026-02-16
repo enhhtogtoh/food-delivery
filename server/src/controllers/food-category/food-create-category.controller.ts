@@ -18,6 +18,6 @@ export const createCategory = async (req: Request, res: Response) => {
       .send({ message: "Category амжиллтай нэмэгдлээ", data: create });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Failed" });
+    res.status(500).send({ message: "Алдаа гарлаа" , error});
   }
 };

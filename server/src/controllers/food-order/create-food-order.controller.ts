@@ -26,6 +26,6 @@ export const createFoodOrder = async (req: Request, res: Response) => {
     return res.status(201).send({ data: order });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Failed" });
+    res.status(500).send({ message: "Алдаа гарлаа", error });
   }
 };

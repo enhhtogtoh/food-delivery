@@ -1,8 +1,8 @@
 import {
   signUpUser,
   signInUser,
-  resetPassReq,
-  forgotPassword,
+  resetPass,
+  resetPassRequest,
   userGet,
 } from "../controllers/user";
 
@@ -14,6 +14,6 @@ export const userRouter = Router();
 userRouter.post("/sign-up", signUpUser);
 userRouter.get("/verify-user", verifyUser);
 userRouter.post("/sign-in", signInUser);
-userRouter.post("/reset-password", resetPassReq);
-userRouter.post("/forgot-password", forgotPassword);
+userRouter.post("/reset-password", resetPass);
+userRouter.post("/forgot-password", resetPassRequest);
 userRouter.get("/get-user", userGet);
