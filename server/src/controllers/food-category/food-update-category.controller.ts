@@ -8,6 +8,7 @@ export const updateFoodCategory = async (req: Request, res: Response) => {
 
     if (!categoryName) {
       res.status(500).send({ message: "Шинэ category нэр оруулна уу." });
+      return
     }
     const updated = await FoodCategoryModel.findByIdAndUpdate(
       foodCategoryId,
@@ -16,6 +17,7 @@ export const updateFoodCategory = async (req: Request, res: Response) => {
     );
     if (!updated) {
       res.status(401).send({ message: "Category not found" });
+      return
     }
 
     res.status(200).send({ message: "Category updated", data: updated });

@@ -7,6 +7,7 @@ export const deleteCategory = async (req: Request, res: Response) => {
     const deleted = await FoodCategoryModel.findByIdAndDelete(foodCategoryId);
     if (!deleted) {
       res.status(404).send({ message: "Устгах Category олдсонгүй" });
+      return
     }
     res.status(200).send({ message: "Category устгагдлаа" });
   } catch (error) {

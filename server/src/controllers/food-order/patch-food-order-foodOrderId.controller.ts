@@ -7,11 +7,17 @@ export const updateFoodOrder = async (req: Request, res: Response) => {
     const { status } = req.body;
 
     if (!foodOrderId) {
-      return res.status(400).send({ message: "Order ID is required" });
+      {
+        res.status(400).send({ message: "Order ID is required" });
+        return;
+      }
     }
 
     if (!Object.values(FoodOrderStatusEnum).includes(status)) {
-      return res.status(400).send({ message: "Invalid status" });
+      {
+        res.status(400).send({ message: "Invalid status" });
+        return;
+      }
     }
 
     const updatedOrder = await FoodOrderModel.findOneAndUpdate(
@@ -21,7 +27,10 @@ export const updateFoodOrder = async (req: Request, res: Response) => {
     );
 
     if (!updatedOrder) {
-      return res.status(404).send({ message: "Order not found" });
+      {
+        res.status(404).send({ message: "Order not found" });
+        return;
+      }
     }
 
     return res.status(200).send(updatedOrder);

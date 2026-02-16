@@ -6,10 +6,12 @@ export const createCategory = async (req: Request, res: Response) => {
     const { categoryName } = req.body;
     if (!categoryName) {
       res.status(400).send({ message: "Category нэр оруулна уу" });
+      return;
     }
     const category = await FoodCategoryModel.findOne({ categoryName });
     if (category) {
       res.status(409).send({ message: "Ийм нэртэй category аль хэдийн байна" });
+      return;
     }
     const create = await FoodCategoryModel.create({ categoryName });
 
@@ -18,6 +20,6 @@ export const createCategory = async (req: Request, res: Response) => {
       .send({ message: "Category амжиллтай нэмэгдлээ", data: create });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Алдаа гарлаа" , error});
+    res.status(500).send({ message: "Алдаа гарлаа", error });
   }
 };

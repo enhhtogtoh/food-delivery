@@ -6,6 +6,7 @@ export const verifyUser = async (req: Request, res: Response) => {
     const token = req.query.token as string;
     if (!token) {
       res.status(400).send({ message: "token олдсонгүй" });
+      return;
     }
     const decode = verify(token, process.env.JWT_SECRET as string);
     console.log(decode);

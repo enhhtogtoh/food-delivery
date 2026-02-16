@@ -8,18 +8,19 @@ export const resetPass = async (req: Request, res: Response) => {
     const { token, newPassword } = req.body;
 
     if (!token || !newPassword) {
-      return res.status(400).send({ message: "Missing data" });
+      res.status(400).send({ message: "Missing data" });
+      return;
     }
 
-
-    const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET!
-    ) as { userId: string };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+      userId: string;
+    };
 
     const user = await UserModel.findById(decoded.userId);
-    if (!user)
-      return res.status(404).send({ message: "Хэрэглэгч олдсонгүй" });
+    if (!user) {
+      res.status(404).send({ message: "Хэрэглэгч олдсонгүй" });
+      return;
+    }
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
@@ -29,6 +30,6 @@ export const resetPass = async (req: Request, res: Response) => {
     res.status(200).send({ message: "Нууц үг амжилттай солигдлоо" });
   } catch (error) {
     console.error(error);
-    res.status(400).send({ message: "Invalid or expired token" , error});
+    res.status(400).send({ message: "Invalid or expired token", error });
   }
 };
